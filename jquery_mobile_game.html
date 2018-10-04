@@ -10,7 +10,6 @@
   	.hidden {
   		display: none;
   	}
-
     table {
     	width: 100%;
     	border-collapse: collapse;
@@ -60,7 +59,6 @@
 <link rel="stylesheet" href="style.css">
 
   <script>
-
   	$( document ).ready(function() {
   		// form validering
   		// custom language object
@@ -77,11 +75,9 @@
       $("form").submit(function(event){
   		//console.log('Form not submitted!');
   		playGame();
-
           event.preventDefault();
       });
   });
-
   </script>
 
 
@@ -104,13 +100,13 @@
 
       <p> Welcome to JS Casino! Choose which game you want to play by clicking on one of the images!</p>
       <div id="img_container">
-        <div><a href="#tic_tac_toe"><img id="image1" src="placeholder.jpg"></a></div>
+        <div><a href="#tic_tac_toe"><img id="image1" src="placeholder1.jpg"></a></div>
         <div><a href="#guess_a_number"><img id="image2" src="placeholder.jpg"></a></div>
         <div><a href="#guess_a_president"><img id="image3" src="placeholder.jpg"></a></div>
       </div>
     </div>
 
-    <div data-role="footer" id="footer">
+    <div data-role="footer" id="footer1">
       <p>Copyright JS Casiono &copy; 2018</p>
     </div>
 
@@ -121,21 +117,21 @@
 <div data-role="page" id="tic_tac_toe">
 
   <div id="tic_header" data-role="header">
-    <a href="#homepage" class="ui-btn ui-icon-home ui-btn-icon-left">Home</a>
-    <h1>Tic tac toe</h1>
+    <a href="#homepage" data-role="button" data-theme="a" class="ui-btn ui-icon-home ui-btn-icon-notext ui-corner-all"></a>
+    <h1><img src="titel.png"></h1>
   </div>
+
+<!-- Image -->
+  <div><a href="#tic_tac_toe"><img src="tictactoe.jpg"></a></div>
 
 <!-- Main content container -->
   <div role="main" class="ui-content">
 
 
     <!-- GAME -->
-
     <div class="container">
       <!-- "Hero" unit -->
-      <div class="jumbotron">
-        <h1 class="display-4 text-center">TIC TAC TOE</h1>
-      </div>
+
       <!-- main content -->
       <div class="row">
         <!-- 2 columns, reordered on medium devices and up -->
@@ -180,18 +176,18 @@
   </div>
 
 <!-- Footer -->
-  <div data-role="footer">
+  <div data-role="footer" id="footer2">
     <p>Copyright JS Casiono &copy; 2018</p>
   </div>
 </div>
-  <!-- End of tiv tac toe page -->
+  <!-- End of tic tac toe page -->
 
   <!-- Start of guess a number page -->
 <div data-role="page" id="guess_a_number">
 
   <div id="number_header" data-role="header">
-    <a href="#homepage" class="ui-btn ui-icon-home ui-btn-icon-left">Home</a>
-    <h1>Guess a number</h1>
+    <a href="#homepage" class="ui-btn ui-icon-home ui-btn-icon-left ui-btn-icon-notext ui-corner-all"></a>
+    <h1><img src="titel.png"></h1>
   </div>
 
 
@@ -234,7 +230,7 @@
   </div>
 
 <!-- Footer -->
-  <div data-role="footer">
+  <div data-role="footer" id="footer3">
     <p>Copyright JS Casiono &copy; 2018</p>
   </div>
 
@@ -246,8 +242,8 @@
 <div data-role="page" id="guess_a_president">
 
   <div id="president_header" data-role="header">
-    <a href="#homepage" class="ui-btn ui-icon-home ui-btn-icon-left">Home</a>
-    <h1>Guess a president</h1>
+    <a href="#homepage" class="ui-btn ui-icon-home ui-btn-icon-left ui-btn-icon-notext ui-corner-all"></a>
+    <h1><img src="titel.png"></h1>
   </div>
 
 <!-- Main content container -->
@@ -265,7 +261,7 @@
   </div>
 
 <!-- Footer -->
-  <div data-role="footer">
+  <div data-role="footer" id="footer4">
     <p>Copyright JS Casiono &copy; 2018</p>
   </div>
 
@@ -276,22 +272,17 @@
 
 <!-- Script til Guess a number -->
 <script>
-
 //Global game variables
 var magicNumber, input, output, button, playersGuess, guessesRemaining;
-
 magicNumber = Math.floor(Math.random() * 11); // random number 0-10
 console.log(magicNumber);
-
 //The game "controls"
 input = document.getElementById("guess");
 output = document.getElementById("output");
 button = document.getElementById("playAgain");
 button.addEventListener('click', playAgain);
-
 //Game state variable
 guessesRemaining = 3;
-
 function playGame(){
 	// core functionality:
     // handling the game statistics (guessesRemaining)
@@ -322,9 +313,7 @@ function playGame(){
 		output.innerHTML = 'Sorry - no more guesses left. The magic number was ' + magicNumber + '. Game over.';
 		endGame();
 	}
-
 }// end function
-
 function endGame(){
 	// disabling all game controls
 	$("#playAgain").removeClass("hidden");
@@ -332,7 +321,6 @@ function endGame(){
 	//Disable the input field
 	input.disabled = true;
 }
-
 function playAgain(){
 	window.location.reload(true);
 }
@@ -341,43 +329,34 @@ function playAgain(){
 
 <!-- Script til Tic Tac Toe -->
 <script>
-
-
 	// global game variables
 	var player, fields, fieldsPlayed, fieldsPlayer1, fieldsPlayer2, winningFields, msg, playButton;
 	// global statistics variables
 	var p1Stats, p2Stats, drawStats;
-
 	player = 1;
 	// an array for all played fields
 	fieldsPlayed = [];
 	// arrays for each player
 	fieldsPlayer1 = [];
 	fieldsPlayer2 = [];
-
 	// make all fields clickable
 	fields = document.getElementsByTagName('td');
-
 	for(let i = 0; i < fields.length; i++  ){
 		fields[i].addEventListener('click', play);
 	}
-
 	msg = document.getElementById('msg');
 	// Play again:
 	playButton = document.getElementById("playAgain");
 	playButton.addEventListener('click', playAgain);
-
 	p1Stats = document.getElementById('player1');
 	p2Stats = document.getElementById('player2');
 	drawStats = document.getElementById('draw');
-
 	function play(){
 		// game core mechanics, marking the fields
 		//console.log('play!');
 		if(fieldsPlayed.includes(this.id)){
 			alert('Field already taken!');
 		}
-
 		if(player === 1 && !fieldsPlayed.includes(this.id)){
 		// this addresses the "owner" of the function, i.e. <td>
 		this.innerHTML = 'X';
@@ -398,7 +377,6 @@ function playAgain(){
 		// checking for a winning combination
 		win();
 	}
-
 	function win(){
 		// analyzing field choices, winning conditions, feedback
 		if(
@@ -418,7 +396,6 @@ function playAgain(){
 			let player1score = localStorage.getItem('player1'); // get the value from local storage
 			player1score++; // increment the value
 			localStorage.setItem('player1',player1score); // submit the value to local storage
-
 			gameOver()
 		} else if (
 			// player 2 winners
@@ -436,7 +413,6 @@ function playAgain(){
 			let player2score = localStorage.getItem('player2'); // get the value from local storage
 			player2score++; // increment the value
 			localStorage.setItem('player2',player2score); // submit the value to local storage
-
 			gameOver()
 		} else if (
 			// game is a draw
@@ -447,7 +423,6 @@ function playAgain(){
 			let drawscore = localStorage.getItem('draw'); // get the value from local storage
 			drawscore++; // increment the value
 			localStorage.setItem('draw', drawscore); // submit the value to local storage
-
 			gameOver()
 		}
 	}
@@ -461,15 +436,12 @@ function playAgain(){
 		// activate the play again button, JS style (% jQuery)
 		playButton.classList.remove("hidden");
 	}
-
 	function playAgain(){
 		// restart the game
 		window.location.reload(true);
 	}
-
 	function gameStats(){
 		// game stats using local storage
-
 		// preparing local storage
 		if(!localStorage.getItem('player1')){
 			localStorage.setItem('player1', 0);
@@ -480,13 +452,11 @@ function playAgain(){
 		let player1score = localStorage.getItem('player1');
 		let player2score = localStorage.getItem('player2');
 		let drawscore = localStorage.getItem('draw');
-
 		// displaying the values from local storage
 		p1Stats.innerHTML = player1score;
 		p2Stats.innerHTML = player2score;
 		drawStats.innerHTML = drawscore;
 	}
-
 	// initializing game stats
 	gameStats();
 </script>
@@ -497,17 +467,14 @@ function playAgain(){
 	// 2 globale variabler (konstanter)
 	const question = 'Who is the 45th president of the United States of America?';
 	const solution = 'donald trump';
-
 	var questionText = document.getElementById('question');
 	var myForm = document.getElementById('myForm');
 	//console.log(questionText);
 	questionText.innerHTML = question;
-
 	function validateAnswer(){
 		//console.log('Besvaret!');
 		let answer = myForm.input.value;
 		console.log(answer);
-
 		if(answer.toLowerCase() === solution){
 			// do something
 			questionText.innerHTML = 'Correct!'
@@ -515,12 +482,9 @@ function playAgain(){
 			// do something else
 			questionText.innerHTML = 'I\'d like that - but it\'s not true';
 		}
-
 		// forhindrer, at formen bliver sendt
 		return false;
 	}
-
-
 </script>
 
 </body>

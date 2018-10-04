@@ -1,5 +1,4 @@
 
-
 #home_header {
   background-color: black;
   color: #e5c48e;
@@ -66,12 +65,62 @@
   box-shadow: 4px 4px 4px grey;
 }
 
-#footer {
+#footer1 {
   position:absolute;
   bottom:0;
   width: 100%;
   background-color: black;
-  color: #e5c48e;
+  color: white;
+  text-shadow: none;
+  font-size: 10px;
+  font-weight: normal;
+  text-align: center;
+  padding-top: 10px;
+}
+
+/* Tic tac toe page */
+
+.display-5 {
+  text-shadow: none;
+  font-weight: bold;
+}
+
+#footer2 {
+  position:absolute;
+  bottom:0;
+  width: 100%;
+  background-color: black;
+  color: white;
+  text-shadow: none;
+  font-size: 10px;
+  font-weight: normal;
+  text-align: center;
+  padding-top: 10px;
+}
+
+/* Guess a number page */
+
+#footer3 {
+  bottom:0;
+  width: 100%;
+  background-color: black;
+  color: white;
+  text-shadow: none;
+  font-size: 10px;
+  font-weight: normal;
+  text-align: center;
+  padding-top: 10px;
+}
+
+
+/* Guess a president page */
+
+#footer4 {
+  position:absolute;
+  bottom:0;
+  width: 100%;
+  background-color: black;
+  color: white;
   text-shadow: none;
   font-size: 10px;
   font-weight: normal;
