@@ -1,0 +1,528 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <style>
+  	.hidden {
+  		display: none;
+  	}
+
+    table {
+    	width: 100%;
+    	border-collapse: collapse;
+    	background-color: #D7CFCF;
+    }
+    td {
+    	border: 6px solid white;
+    	width: 33.333%;
+    	font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, "sans-serif";
+    	text-align: center;
+    	font-size: 5em;
+    	vertical-align: middle;
+    }
+    /* https://spin.atomicobject.com/2015/07/14/css-responsive-square/ */
+    td:after {
+    	content: "";
+    	display: block;
+    	padding-bottom: 10%;
+    }
+    td:first-of-type {
+    	border-left-color: transparent;
+    	border-top-color: transparent;
+    }
+    td:nth-of-type(2) {
+    	border-top-color: transparent;
+    }
+    td:nth-of-type(3) {
+    	border-right-color: transparent;
+    	border-top-color: transparent;
+    }
+    tr:nth-of-type(3) td {
+    	border-bottom-color: transparent;
+    }
+  </style>
+
+  <title>jQuery Mobile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+  <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+  <!-- loading jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- loading formvalidator plugin (formvalidator.net) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+
+<link rel="stylesheet" href="style.css">
+
+  <script>
+
+  	$( document ).ready(function() {
+  		// form validering
+  		// custom language object
+  		var myErrorFeedback = {
+  			badInt: 'Please enter a number between 0-10.'
+  		}
+  		// formvalidator setup function
+  		$.validate({
+  			// language object overwritten by custom language object
+      		language : myErrorFeedback,
+  			inputParentClassOnError : 'alert alert-danger' // <- assigning Bootstrap's alert classes to error message container
+    		});
+    	//prevent form submission
+      $("form").submit(function(event){
+  		//console.log('Form not submitted!');
+  		playGame();
+
+          event.preventDefault();
+      });
+  });
+
+  </script>
+
+
+
+</head>
+
+<body>
+
+<!-- jQuery mobile container -->
+  <div data-role="page" id="homepage">
+
+    <div id="home_header" data-role="header">
+      <h1><img src="titel.png"></h1>
+    </div>
+
+<!-- Main content container -->
+<div><a href="#tic_tac_toe"><img class="header_img" src="js_casino.jpg"></a></div>
+
+    <div role="main" class="ui-content">
+
+      <p> Welcome to JS Casino! Choose which game you want to play by clicking on one of the images!</p>
+      <div id="img_container">
+        <div><a href="#tic_tac_toe"><img id="image1" src="placeholder.jpg"></a></div>
+        <div><a href="#guess_a_number"><img id="image2" src="placeholder.jpg"></a></div>
+        <div><a href="#guess_a_president"><img id="image3" src="placeholder.jpg"></a></div>
+      </div>
+    </div>
+
+    <div data-role="footer" id="footer">
+      <p>Copyright JS Casiono &copy; 2018</p>
+    </div>
+
+  </div>
+  <!-- End of homepage -->
+
+  <!-- Start of tic tac toe page -->
+<div data-role="page" id="tic_tac_toe">
+
+  <div id="tic_header" data-role="header">
+    <a href="#homepage" class="ui-btn ui-icon-home ui-btn-icon-left">Home</a>
+    <h1>Tic tac toe</h1>
+  </div>
+
+<!-- Main content container -->
+  <div role="main" class="ui-content">
+
+
+    <!-- GAME -->
+
+    <div class="container">
+      <!-- "Hero" unit -->
+      <div class="jumbotron">
+        <h1 class="display-4 text-center">TIC TAC TOE</h1>
+      </div>
+      <!-- main content -->
+      <div class="row">
+        <!-- 2 columns, reordered on medium devices and up -->
+        <!-- First column -->
+        <div class="col-lg-6 order-lg-2">
+          <table>
+            <tbody>
+              <tr>
+                <td id="1">&nbsp;</td>
+                <td id="2">&nbsp;</td>
+                <td id="3">&nbsp;</td>
+              </tr>
+              <tr>
+                <td id="4">&nbsp;</td>
+                <td id="5">&nbsp;</td>
+                <td id="6">&nbsp;</td>
+              </tr>
+              <tr>
+                <td id="7">&nbsp;</td>
+                <td id="8">&nbsp;</td>
+                <td id="9">&nbsp;</td>
+              </tr>
+            </tbody>
+          </table>
+          <div id="msg" class="text-center alert alert-success" role="alert">Click fields to play!</div>
+          <button id="playAgain" class="mt-3 mb-3 p-3 btn btn-secondary hidden">Play it again, Sam!</button>
+        </div>
+        <!-- Second column -->
+        <div class="col-lg-6 order-lg-1">
+          <div class="text-center">2 Player version</div>
+          <hr>
+          <p>Player 1 score: <span id="player1"></span></p>
+          <p>Player 2 score: <span id="player2"></span></p>
+          <p>Draw: <span id="draw"></span></p>
+          <hr>
+
+        </div>
+      </div>
+      <!-- Container end -->
+    </div>
+
+  </div>
+
+<!-- Footer -->
+  <div data-role="footer">
+    <p>Copyright JS Casiono &copy; 2018</p>
+  </div>
+</div>
+  <!-- End of tiv tac toe page -->
+
+  <!-- Start of guess a number page -->
+<div data-role="page" id="guess_a_number">
+
+  <div id="number_header" data-role="header">
+    <a href="#homepage" class="ui-btn ui-icon-home ui-btn-icon-left">Home</a>
+    <h1>Guess a number</h1>
+  </div>
+
+
+<!-- Main content container -->
+  <div role="main" class="ui-content">
+
+    <!-- GAME -->
+
+    <div class="container">
+      <!-- "Hero" unit -->
+      <br><br><div class="jumbotron">
+        <h1 class="display-4">Guess a number!</h1>
+      </div>
+      <!-- main content -->
+      <div class="row">
+        <!-- 2 columns, reordered on medium devices and up -->
+        <!-- First column -->
+        <div class="col-lg-6 order-lg-2">
+          <div id="output" class="text-center alert alert-success" role="alert">I am thinking of a number between 0 and 10...</div>
+          <form method="post">
+            <div class="input-group">
+              <div class="input-group-prepend"> <span class="input-group-text">Number from 0-10:</span> </div>
+              <input id="guess" class="form-control" data-validation="number" data-validation-allowing="range[0;10]" data-validation-error-msg-container="#error-dialog" placeholder="Enter your guess..." autofocus>
+            </div>
+            <!-- http://www.formvalidator.net/#configuration_position -->
+            <div id="error-dialog" class="mt-3"></div>
+            <button id="play" class="mt-3 mb-3 p-3 btn btn-secondary">Guess the magic number!</button>
+          </form>
+          <!-- should be outside the form -->
+          <button id="playAgain" class="mt-3 mb-3 p-3 btn btn-secondary hidden">Play again!</button>
+        </div>
+        <!-- Second column -->
+        <div class="col-lg-6 order-lg-1">
+          <div class="text-center">Try and guess the magic number - you have 3 attempts!</div>
+        </div>
+      </div>
+      <!-- Container end -->
+    </div>
+
+  </div>
+
+<!-- Footer -->
+  <div data-role="footer">
+    <p>Copyright JS Casiono &copy; 2018</p>
+  </div>
+
+</div>
+  <!-- End of guess a number page -->
+
+
+  <!-- Start of guess a president page -->
+<div data-role="page" id="guess_a_president">
+
+  <div id="president_header" data-role="header">
+    <a href="#homepage" class="ui-btn ui-icon-home ui-btn-icon-left">Home</a>
+    <h1>Guess a president</h1>
+  </div>
+
+<!-- Main content container -->
+  <div role="main" class="ui-content">
+
+    <!-- GAME -->
+    <h2>Guess a president!</h2>
+    <p id="question"></p>
+
+    <form id="myForm" method="post" onsubmit="return validateAnswer()">
+    	<p><input type="text" id="input" placeholder="Type your answer..." autofocus></p>
+    	<button type="submit" id="submit">Submit your answer!</button>
+    </form>
+
+  </div>
+
+<!-- Footer -->
+  <div data-role="footer">
+    <p>Copyright JS Casiono &copy; 2018</p>
+  </div>
+
+
+</div>
+<!-- End of guess a president page -->
+
+
+<!-- Script til Guess a number -->
+<script>
+
+//Global game variables
+var magicNumber, input, output, button, playersGuess, guessesRemaining;
+
+magicNumber = Math.floor(Math.random() * 11); // random number 0-10
+console.log(magicNumber);
+
+//The game "controls"
+input = document.getElementById("guess");
+output = document.getElementById("output");
+button = document.getElementById("playAgain");
+button.addEventListener('click', playAgain);
+
+//Game state variable
+guessesRemaining = 3;
+
+function playGame(){
+	// core functionality:
+    // handling the game statistics (guessesRemaining)
+	playersGuess = parseInt(input.value); // converting string input to number!
+	//console.log(playersGuess);
+	// countdown
+	guessesRemaining -= 1;
+	// analyzing the player's guess (i.e. the variable playersGuess!)
+	if(playersGuess < magicNumber){
+		output.innerHTML = playersGuess + ' is too low! ' + guessesRemaining + ' guesses left.';
+		// clear the input field
+		input.value = '';
+		// autofocus
+		input.focus();
+	} else if(playersGuess > magicNumber){
+		output.innerHTML = playersGuess + ' is too high!' + guessesRemaining + ' guesses left.';
+		input.value = '';
+		input.focus();
+	} else if(playersGuess === magicNumber){
+		output.innerHTML = 'You got it! ' + playersGuess + ' is the magic number!';
+		endGame();
+	}
+	// last attempt
+	if(guessesRemaining === 0 && playersGuess === magicNumber){
+		output.innerHTML = 'Yes - in the final attempt! ' + playersGuess + ' is the magic number!';
+		endGame();
+	} else if(guessesRemaining === 0){
+		output.innerHTML = 'Sorry - no more guesses left. The magic number was ' + magicNumber + '. Game over.';
+		endGame();
+	}
+
+}// end function
+
+function endGame(){
+	// disabling all game controls
+	$("#playAgain").removeClass("hidden");
+	$("#play").addClass("hidden");
+	//Disable the input field
+	input.disabled = true;
+}
+
+function playAgain(){
+	window.location.reload(true);
+}
+</script>
+
+
+<!-- Script til Tic Tac Toe -->
+<script>
+
+
+	// global game variables
+	var player, fields, fieldsPlayed, fieldsPlayer1, fieldsPlayer2, winningFields, msg, playButton;
+	// global statistics variables
+	var p1Stats, p2Stats, drawStats;
+
+	player = 1;
+	// an array for all played fields
+	fieldsPlayed = [];
+	// arrays for each player
+	fieldsPlayer1 = [];
+	fieldsPlayer2 = [];
+
+	// make all fields clickable
+	fields = document.getElementsByTagName('td');
+
+	for(let i = 0; i < fields.length; i++  ){
+		fields[i].addEventListener('click', play);
+	}
+
+	msg = document.getElementById('msg');
+	// Play again:
+	playButton = document.getElementById("playAgain");
+	playButton.addEventListener('click', playAgain);
+
+	p1Stats = document.getElementById('player1');
+	p2Stats = document.getElementById('player2');
+	drawStats = document.getElementById('draw');
+
+	function play(){
+		// game core mechanics, marking the fields
+		//console.log('play!');
+		if(fieldsPlayed.includes(this.id)){
+			alert('Field already taken!');
+		}
+
+		if(player === 1 && !fieldsPlayed.includes(this.id)){
+		// this addresses the "owner" of the function, i.e. <td>
+		this.innerHTML = 'X';
+		this.style.color = 'white';
+		fieldsPlayer1.push(parseInt(this.id));
+		console.log('Player 1 played ' + fieldsPlayer1.toString());
+		player = 2;
+		} else if(player === 2 && !fieldsPlayed.includes(this.id)){
+			this.innerHTML = '0';
+			this.style.color = 'darkturquoise';
+			fieldsPlayer2.push(parseInt(this.id));
+			console.log('Player 2 played ' + fieldsPlayer2.toString());
+			player = 1;
+		}
+		// store field in array
+		fieldsPlayed.push(this.id);
+		//console.log(this.id + ' clicked!');
+		// checking for a winning combination
+		win();
+	}
+
+	function win(){
+		// analyzing field choices, winning conditions, feedback
+		if(
+			// player 1 winners
+			fieldsPlayer1.includes(1) && fieldsPlayer1.includes(2) && fieldsPlayer1.includes(3) ||
+		  	fieldsPlayer1.includes(4) && fieldsPlayer1.includes(5) && fieldsPlayer1.includes(6) ||
+		  	fieldsPlayer1.includes(7) && fieldsPlayer1.includes(8) && fieldsPlayer1.includes(9) ||
+		  	fieldsPlayer1.includes(1) && fieldsPlayer1.includes(5) && fieldsPlayer1.includes(9) ||
+		  	fieldsPlayer1.includes(3) && fieldsPlayer1.includes(5) && fieldsPlayer1.includes(7)	||
+		  	fieldsPlayer1.includes(1) && fieldsPlayer1.includes(4) && fieldsPlayer1.includes(7) ||
+		  	fieldsPlayer1.includes(2) && fieldsPlayer1.includes(5) && fieldsPlayer1.includes(8) ||
+		  	fieldsPlayer1.includes(3) && fieldsPlayer1.includes(6) && fieldsPlayer1.includes(9)
+		)
+			{
+			msg.innerHTML = "Player 1 won!";
+			// statistics update
+			let player1score = localStorage.getItem('player1'); // get the value from local storage
+			player1score++; // increment the value
+			localStorage.setItem('player1',player1score); // submit the value to local storage
+
+			gameOver()
+		} else if (
+			// player 2 winners
+			fieldsPlayer2.includes(1) && fieldsPlayer2.includes(2) && fieldsPlayer2.includes(3) ||
+		  	fieldsPlayer2.includes(4) && fieldsPlayer2.includes(5) && fieldsPlayer2.includes(6) ||
+		  	fieldsPlayer2.includes(7) && fieldsPlayer2.includes(8) && fieldsPlayer2.includes(9) ||
+		  	fieldsPlayer2.includes(1) && fieldsPlayer2.includes(5) && fieldsPlayer2.includes(9) ||
+		  	fieldsPlayer2.includes(3) && fieldsPlayer2.includes(5) && fieldsPlayer2.includes(7) ||
+		  	fieldsPlayer2.includes(1) && fieldsPlayer2.includes(4) && fieldsPlayer2.includes(7) ||
+		  	fieldsPlayer2.includes(2) && fieldsPlayer2.includes(5) && fieldsPlayer2.includes(8) ||
+		  	fieldsPlayer2.includes(3) && fieldsPlayer2.includes(6) && fieldsPlayer2.includes(9)
+		)
+			{
+			msg.innerHTML = "Player 2 won!";
+			let player2score = localStorage.getItem('player2'); // get the value from local storage
+			player2score++; // increment the value
+			localStorage.setItem('player2',player2score); // submit the value to local storage
+
+			gameOver()
+		} else if (
+			// game is a draw
+			fieldsPlayed.length === 9
+		)
+			{
+			msg.innerHTML = "Game is a draw!";
+			let drawscore = localStorage.getItem('draw'); // get the value from local storage
+			drawscore++; // increment the value
+			localStorage.setItem('draw', drawscore); // submit the value to local storage
+
+			gameOver()
+		}
+	}
+	function gameOver(){
+		// ending the game
+		// removing ALL event listeners
+		gameStats();
+		 for (var i = 0; i < fields.length; i++) {
+			fields[i].removeEventListener('click', play);
+		}
+		// activate the play again button, JS style (% jQuery)
+		playButton.classList.remove("hidden");
+	}
+
+	function playAgain(){
+		// restart the game
+		window.location.reload(true);
+	}
+
+	function gameStats(){
+		// game stats using local storage
+
+		// preparing local storage
+		if(!localStorage.getItem('player1')){
+			localStorage.setItem('player1', 0);
+			localStorage.setItem('player2', 0);
+			localStorage.setItem('draw', 0);
+		}
+		// reading from local storage
+		let player1score = localStorage.getItem('player1');
+		let player2score = localStorage.getItem('player2');
+		let drawscore = localStorage.getItem('draw');
+
+		// displaying the values from local storage
+		p1Stats.innerHTML = player1score;
+		p2Stats.innerHTML = player2score;
+		drawStats.innerHTML = drawscore;
+	}
+
+	// initializing game stats
+	gameStats();
+</script>
+
+
+<!-- Script til Guess a president -->
+<script>
+	// 2 globale variabler (konstanter)
+	const question = 'Who is the 45th president of the United States of America?';
+	const solution = 'donald trump';
+
+	var questionText = document.getElementById('question');
+	var myForm = document.getElementById('myForm');
+	//console.log(questionText);
+	questionText.innerHTML = question;
+
+	function validateAnswer(){
+		//console.log('Besvaret!');
+		let answer = myForm.input.value;
+		console.log(answer);
+
+		if(answer.toLowerCase() === solution){
+			// do something
+			questionText.innerHTML = 'Correct!'
+		} else {
+			// do something else
+			questionText.innerHTML = 'I\'d like that - but it\'s not true';
+		}
+
+		// forhindrer, at formen bliver sendt
+		return false;
+	}
+
+
+</script>
+
+</body>
+
+</html>

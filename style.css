@@ -1,0 +1,80 @@
+
+
+#home_header {
+  background-color: black;
+  color: #e5c48e;
+  text-shadow: none;
+  font-size: 20px;
+}
+
+#tic_header {
+  background-color: black;
+  color: #e5c48e;
+  text-shadow: none;
+  font-size: 15px;
+}
+
+#number_header {
+  background-color: black;
+  color: #e5c48e;
+  text-shadow: none;
+  font-size: 15px;
+}
+
+#president_header {
+  background-color: black;
+  color: #e5c48e;
+  text-shadow: none;
+  font-size: 15px;
+}
+
+.ui-btn-icon-left {
+  color: red
+}
+
+.ui-content {
+  min-width: 100%;
+}
+
+.header_img {
+  width: 100%;
+}
+
+.ui-content {
+  text-align: center;
+  padding-top: 30px;
+}
+
+#img_container {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 10px;
+}
+
+#image1 {
+  border-radius: 15px;
+  box-shadow: 4px 4px 4px grey;
+}
+
+#image2 {
+  border-radius: 15px;
+  box-shadow: 4px 4px 4px grey;
+}
+
+#image3 {
+  border-radius: 15px;
+  box-shadow: 4px 4px 4px grey;
+}
+
+#footer {
+  position:absolute;
+  bottom:0;
+  width: 100%;
+  background-color: black;
+  color: #e5c48e;
+  text-shadow: none;
+  font-size: 10px;
+  font-weight: normal;
+  text-align: center;
+  padding-top: 10px;
+}
