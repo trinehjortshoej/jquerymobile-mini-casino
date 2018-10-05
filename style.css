@@ -1,9 +1,27 @@
+.hidden {
+  display: none;
+}
+
+* {
+  font-family: 'Poppins', sans-serif;
+}
 
 #home_header {
   background-color: black;
-  color: #e5c48e;
-  text-shadow: none;
+}
+
+.intro {
+  font-weight: bold;
   font-size: 20px;
+}
+
+.intro_text {
+
+}
+
+#img_container {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 #tic_header {
@@ -27,8 +45,9 @@
   font-size: 15px;
 }
 
-.ui-btn-icon-left {
-  color: red
+.ui-icon-home {
+  background-color: black !important;
+  border: none !important;
 }
 
 .ui-content {
@@ -53,16 +72,19 @@
 #image1 {
   border-radius: 15px;
   box-shadow: 4px 4px 4px grey;
+  margin: 5px;
 }
 
 #image2 {
   border-radius: 15px;
   box-shadow: 4px 4px 4px grey;
+  margin: 5px;
 }
 
 #image3 {
   border-radius: 15px;
   box-shadow: 4px 4px 4px grey;
+  margin: 5px;
 }
 
 #footer1 {
@@ -79,6 +101,10 @@
 }
 
 /* Tic tac toe page */
+
+.img1 {
+  width: 100%;
+}
 
 .display-5 {
   text-shadow: none;
@@ -98,9 +124,92 @@
   padding-top: 10px;
 }
 
+table {
+  width: 100%;
+  background-color: #fcb231;
+  margin-bottom: 10px;
+
+}
+
+td {
+  border: 6px solid black;
+  width: 33.333%;
+  font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, "sans-serif";
+  text-align: center;
+  color: white;
+  font-size: 5em;
+  vertical-align: middle;
+}
+td:after {
+  content: "";
+  display: block;
+  padding-bottom: 10%;
+}
+
+#msg {
+  background: #369bd1;
+  text-shadow: none;
+  color: white;
+  font-size: 1.5em;
+  border: 6px solid black;
+}
+
+#playAgain {
+  background: #d43958;
+  text-shadow: none;
+  color: white;
+  font-size: 1.5em;
+  border: 6px solid black;
+}
+
 /* Guess a number page */
 
+.img2 {
+  width: 100%
+}
+
+.text-center {
+  font-weight: bolder;
+  font-size: 17px;
+  padding-bottom: 10px;
+}
+
+.input-group-prepend {
+  padding-top: 20px;
+  padding-bottom: 15px;
+  margin: 0 auto;
+}
+
+.ui-input-text {
+  margin: 0 auto;
+  padding-bottom: 10px;
+  width: 100%;
+}
+
+#guess::placeholder {
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+#play {
+  background-color: #403ea9;
+  border: 5px solid black;
+  color: white;
+  text-shadow: none;
+  font-weight: normal;
+  font-family: 'Poppins', sans-serif;
+}
+
+#playAgain {
+  background-color: #403ea9;
+  color: white;
+  text-shadow: none;
+  font-weight: normal;
+  font-family: 'Poppins', sans-serif;
+}
+
 #footer3 {
+  position: absolute;
   bottom:0;
   width: 100%;
   background-color: black;
@@ -115,6 +224,33 @@
 
 /* Guess a president page */
 
+.img3 {
+  width: 100%
+}
+
+.box {
+  border: 2px solid black;
+  border-radius: 15px;
+  padding: 20px;
+}
+
+#question {
+  font-size: 17px;
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+
+#input::placeholder {
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+#submit {
+  background-color: lightblue;
+  text-shadow: none;
+  font-family: 'Poppins', sans-serif;
+}
+
 #footer4 {
   position:absolute;
   bottom:0;
@@ -126,4 +262,29 @@
   font-weight: normal;
   text-align: center;
   padding-top: 10px;
+}
+
+
+
+@media screen and (min-width: 700px) {
+
+  #homepage {
+    width: 700px;
+    margin-left: 20%;
+  }
+
+  #tic_tac_toe {
+    width: 700px;
+    margin-left: 20%;
+  }
+
+  #guess_a_number {
+    width: 700px;
+    margin-left: 20%;
+  }
+
+  #guess_a_president {
+    width: 700px;
+    margin-left: 20%;
+  }
 }
